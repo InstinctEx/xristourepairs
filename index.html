@@ -350,9 +350,12 @@
     .img-badge i{color:var(--red);font-size:16px}
     .img-badge strong{display:block;font-size:12px;font-weight:500}
     .img-badge span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-    /* Red corner line */
-    .img-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);z-index:2;opacity:0;transition:opacity .3s}
-    .img-panel:hover::before{opacity:1}
+    /* Red corner brackets */
+    .img-panel::before,.img-panel::after{content:'';position:absolute;width:22px;height:22px;z-index:4;opacity:0;transition:opacity .4s,transform .4s cubic-bezier(.2,0,0,1);pointer-events:none}
+    .img-panel::before{top:14px;left:14px;border-top:2px solid var(--red);border-left:2px solid var(--red);transform:translate(-8px,-8px)}
+    .img-panel::after{bottom:14px;right:14px;border-bottom:2px solid var(--red);border-right:2px solid var(--red);transform:translate(8px,8px)}
+    .img-panel:hover::before{opacity:1;transform:translate(0,0)}
+    .img-panel:hover::after{opacity:1;transform:translate(0,0)}
 
     /* ====== PAINT & POLISH ====== */
     #paint-polish{background:var(--charcoal);position:relative}
@@ -384,8 +387,12 @@
     .ps-label{position:absolute;bottom:22px;left:22px;right:22px}
     .ps-label .f-label{margin-bottom:5px;display:block}
     .ps-label h4{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1rem,2.2vw,1.3rem);text-transform:uppercase;letter-spacing:.5px;line-height:1.1}
-    .ps-item::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:2}
-    .ps-item:hover::after{transform:scaleX(1)}
+    /* Red corner brackets */
+    .ps-item::before,.ps-item::after{content:'';position:absolute;width:18px;height:18px;z-index:4;opacity:0;transition:opacity .4s,transform .4s cubic-bezier(.2,0,0,1);pointer-events:none}
+    .ps-item::before{top:12px;left:12px;border-top:2px solid var(--red);border-left:2px solid var(--red);transform:translate(-6px,-6px)}
+    .ps-item::after{bottom:12px;right:12px;border-bottom:2px solid var(--red);border-right:2px solid var(--red);transform:translate(6px,6px)}
+    .ps-item:hover::before{opacity:1;transform:translate(0,0)}
+    .ps-item:hover::after{opacity:1;transform:translate(0,0)}
 
     /* ====== GLASS SECTION ====== */
     #glass-section{background:var(--cream);color:var(--black)}
@@ -434,8 +441,12 @@
     .g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
     .g-item:hover img{transform:scale(1.07)}
     .g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.06) 50%,transparent 100%)}
-    .g-item::before{content:'';position:absolute;z-index:2;top:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,0,0,1)}
-    .g-item:hover::before{transform:scaleX(1)}
+    /* Red corner brackets */
+    .g-item::before,.g-item::after{content:'';position:absolute;width:18px;height:18px;z-index:4;opacity:0;transition:opacity .4s,transform .4s cubic-bezier(.2,0,0,1);pointer-events:none}
+    .g-item::before{top:12px;left:12px;border-top:2px solid var(--red);border-left:2px solid var(--red);transform:translate(-6px,-6px)}
+    .g-item::after{bottom:12px;right:12px;border-bottom:2px solid var(--red);border-right:2px solid var(--red);transform:translate(6px,6px)}
+    .g-item:hover::before{opacity:1;transform:translate(0,0)}
+    .g-item:hover::after{opacity:1;transform:translate(0,0)}
     .g-caption{position:absolute;bottom:0;left:0;right:0;z-index:1;padding:22px 20px;transform:translateY(6px);opacity:0;transition:transform .35s,opacity .35s}
     .g-item:hover .g-caption{transform:translateY(0);opacity:1}
     .g-cap-tag{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:4px;display:block}
