@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#080808"/>
   <title>Φανοποιΐα &amp; Βαφές Αγ. Κωνσταντίνος | Χρήστου Μιχάλης</title>
 
   <!-- SEO -->
   <meta name="description" content="Φανοποιΐα, βαφές, αντικατάσταση τζαμιών & κλιματισμός αυτοκινήτου στον Αγ. Κωνσταντίνο. Εξουσιοδοτημένοι συνεργάτες CARGLASS & FilisGlass. Καλέστε 22350 91418."/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://xristourepairs.cc/"/>
+  <link rel="preload" as="image" href="images/2cars.jpg" fetchpriority="high"/>
 
   <!-- Open Graph (Discord, Facebook, WhatsApp) -->
   <meta property="og:type" content="website"/>
@@ -131,6 +133,12 @@
   <style>
     /* ====== RESET ====== */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    /* ====== SKIP LINK ====== */
+    .skip-link{position:absolute;top:-48px;left:16px;background:var(--red);color:#fff;padding:10px 20px;z-index:9999;border-radius:0 0 6px 6px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:top .2s;text-decoration:none}
+    .skip-link:focus{top:0}
+    /* ====== FOCUS ====== */
+    :focus-visible{outline:2px solid var(--red);outline-offset:3px}
+    button:focus-visible,a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
     :root{
       --red:#E8001C;
       --red-dark:#b5001a;
@@ -214,14 +222,14 @@
       border-radius:4px;transition:all .22s;text-transform:uppercase;
     }
     .nav-call:hover{background:var(--red);border-color:var(--red)}
-    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:7px;background:none;border:none}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:7px;background:none;border:none;touch-action:manipulation}
     .hamburger span{display:block;width:22px;height:1.5px;background:#fff;transition:all .3s}
     .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
     /* ====== MOBILE MENU ====== */
-    #mob{position:fixed;inset:0;z-index:899;background:rgba(8,8,8,.98);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;pointer-events:none;transition:opacity .35s}
+    #mob{position:fixed;inset:0;z-index:899;background:rgba(8,8,8,.98);backdrop-filter:blur(30px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;pointer-events:none;transition:opacity .35s;overscroll-behavior:contain}
     #mob.open{opacity:1;pointer-events:all}
     #mob a{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(28px,7vw,52px);text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);transition:color .2s;padding:4px 0}
     #mob a:hover{color:var(--red)}
@@ -284,7 +292,7 @@
     .scroll-cue span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 
     /* ====== BUTTONS ====== */
-    .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 28px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-radius:4px;cursor:pointer;border:1px solid transparent;transition:all .25s cubic-bezier(.25,.46,.45,.94);white-space:nowrap}
+    .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 28px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-radius:4px;cursor:pointer;border:1px solid transparent;transition:all .25s cubic-bezier(.25,.46,.45,.94);white-space:nowrap;touch-action:manipulation}
     .btn-red{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 4px 24px var(--red-glow)}
     .btn-red:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 10px 32px var(--red-glow)}
     .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
@@ -514,6 +522,9 @@
     .nl-input:focus{border-color:var(--red)}
     .nl-btn{padding:10px 14px;background:var(--red);border:none;border-radius:5px;color:#fff;cursor:pointer;transition:background .2s;font-size:12px}
     .nl-btn:hover{background:var(--red-dark)}
+    .nl-btn:disabled{opacity:.5;cursor:not-allowed}
+    .nl-success{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(100,220,100,.8);margin-top:8px;display:none}
+    .nl-success.show{display:block}
     .footer-bar{border-top:1px solid var(--border);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
     .footer-bar p{font-family:'DM Mono',monospace;font-size:10.5px;color:rgba(255,255,255,.2)}
     .footer-bar a{color:rgba(232,0,28,.55);transition:color .2s}
@@ -550,9 +561,9 @@
       .footer-inner{grid-template-columns:1fr 1fr;gap:36px}
     }
     @media(max-width:960px){
-      #hero{grid-template-columns:1fr;min-height:100svh}
+      #hero{grid-template-columns:1fr;min-height:100svh;background:url('images/2cars.jpg') center 30%/cover no-repeat}
       .hero-right{display:none}
-      .hero-left{padding:var(--nav-h) 32px 60px;justify-content:center}
+      .hero-left{padding:var(--nav-h) 32px 60px;justify-content:center;background:linear-gradient(to bottom,rgba(8,8,8,.88) 0%,rgba(8,8,8,.96) 100%)}
       .nav-links,.nav-call{display:none}
       .hamburger{display:flex}
       .sbar-grid{grid-template-columns:repeat(3,1fr);max-width:100%}
@@ -591,7 +602,8 @@
 </head>
 <body>
 
-<div class="lang-overlay" id="langOverlay"><div class="lang-overlay-slice"></div><div class="lang-overlay-stripe"></div></div>
+<a class="skip-link" href="#body-repair">Skip to content</a>
+<div class="lang-overlay" id="langOverlay" aria-hidden="true"><div class="lang-overlay-slice"></div><div class="lang-overlay-stripe"></div></div>
 <div id="sp"></div>
 
 <!-- NAVBAR -->
@@ -618,14 +630,14 @@
         <button class="l-btn active" id="btnGR" onclick="setLang('gr')">GR</button>
         <button class="l-btn" id="btnEN" onclick="setLang('en')">EN</button>
       </div>
-      <a href="tel:+302235091418" class="nav-call"><i class="fas fa-phone"></i><span class="gr">Καλέστε</span><span class="en">Call</span></a>
-      <button class="hamburger" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      <a href="tel:+302235091418" class="nav-call" aria-label="Call us: 22350 91418"><i class="fas fa-phone"></i><span class="gr">Καλέστε</span><span class="en">Call</span></a>
+      <button class="hamburger" id="ham" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mob" onclick="toggleMenu()"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div id="mob">
+<div id="mob" role="dialog" aria-modal="true" aria-label="Navigation">
   <a href="#body-repair" onclick="closeMenu()"><span class="gr">Φανοποιΐα</span><span class="en">Body Repair</span></a>
   <a href="#paint-polish" onclick="closeMenu()"><span class="gr">Βαφές</span><span class="en">Paint &amp; Polish</span></a>
   <a href="#glass-section" onclick="closeMenu()"><span class="gr">Τζάμια</span><span class="en">Glass</span></a>
@@ -636,9 +648,9 @@
     <button class="mob-l" id="mEN" onclick="setLang('en');updateMobLang('en')">ENGLISH</button>
   </div>
   <div class="mob-social">
-    <a href="#"><i class="fab fa-instagram"></i></a>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
   </div>
 </div>
 
@@ -705,7 +717,7 @@
   </div>
 
   <div class="hero-right">
-    <img src="images/2cars.jpg" alt="Christou Michalis Body Shop" />
+    <img src="images/2cars.jpg" alt="Christou Michalis Body Shop — customer vehicles" fetchpriority="high"/>
     <div class="hero-right-overlay"></div>
     <div class="hero-badge">
       <i class="fas fa-shield-alt"></i>
@@ -1249,10 +1261,10 @@
         <p class="f-desc gr">Φανοποιΐα &amp; βαφές αυτοκινήτου στον <strong>Αγ. Κωνσταντίνο</strong>. Εξουσιοδοτημένοι συνεργάτες CARGLASS &amp; FilisGlass.</p>
         <p class="f-desc en">Auto body shop &amp; paint in <strong>Ag. Konstantinos</strong>. Authorized CARGLASS &amp; FilisGlass partners.</p>
         <div class="f-social">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-tiktok"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
       <div class="f-col">
@@ -1277,10 +1289,12 @@
         <h5>Newsletter</h5>
         <p style="font-size:11.5px;color:var(--muted);margin-bottom:12px" class="gr">Μείνετε ενημερωμένοι για προσφορές &amp; νέα.</p>
         <p style="font-size:11.5px;color:var(--muted);margin-bottom:12px" class="en">Stay updated with our latest offers &amp; news.</p>
-        <form class="nl-form" onsubmit="return false">
-          <input class="nl-input" type="email" placeholder="Email"/>
-          <button class="nl-btn" type="submit"><i class="fas fa-paper-plane"></i></button>
+        <form class="nl-form" id="nl-form" onsubmit="handleNewsletter(event)">
+          <label for="nl-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Email</label>
+          <input class="nl-input" id="nl-email" type="email" placeholder="Email" autocomplete="email" aria-label="Your email address" required/>
+          <button class="nl-btn" type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
         </form>
+        <div class="nl-success" id="nl-success" role="status" aria-live="polite"><span class="gr">Ευχαριστούμε!</span><span class="en">Thank you!</span></div>
       </div>
     </div>
     <div class="footer-bar">
@@ -1291,109 +1305,6 @@
 </footer>
 
 <script>
-// ── CAR BODY PANEL REFLECTIONS ───────────────────────
-(function(){
-  const canvas = document.getElementById('paint-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  let W = 0, H = 0;
-  function setSize(){
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = canvas.parentElement.offsetHeight || window.innerHeight;
-  }
-  setSize();
-  window.addEventListener('resize', setSize, {passive:true});
-
-  // One streak = a light reflection sweeping across a car panel
-  function Streak(init){
-    this.reset(init);
-  }
-  Streak.prototype.reset = function(init){
-    this.angle   = (Math.random() - 0.5) * 0.45;
-    this.speed   = (Math.random() * 1.2 + 0.5) * (Math.random()<.5 ? 1 : -1);
-    this.specular= Math.random() < 0.6;
-    this.lw      = this.specular ? Math.random()*2+0.8 : Math.random()*40+14;
-    this.cy      = H * (0.05 + Math.random() * 0.9);
-
-    // Place x randomly across visible range on init, off-screen on respawn
-    if(init){
-      this.cx = Math.random() * W;
-    } else {
-      this.cx = this.speed > 0 ? -W*0.1 : W*1.1;
-    }
-
-    // Color
-    const r = Math.random();
-    if(r < 0.16){
-      this.cr=232; this.cg=0; this.cb=28;
-      this.pa = this.specular ? 0.75 : 0.20;
-    } else {
-      const v = 185 + Math.floor(Math.random()*70);
-      this.cr=v; this.cg=v; this.cb=Math.min(255,v+12);
-      this.pa = this.specular ? 0.55 : 0.14;
-    }
-  };
-
-  Streak.prototype.update = function(){
-    this.cx += this.speed;
-    if(this.speed > 0 && this.cx > W*1.1) this.reset(false);
-    if(this.speed < 0 && this.cx < -W*0.1) this.reset(false);
-  };
-
-  Streak.prototype.draw = function(){
-    ctx.save();
-    ctx.translate(this.cx, this.cy);
-    ctx.rotate(this.angle);
-
-    // Gradient fades at both ends along the streak
-    const hl = W * 0.7;
-    const lg = ctx.createLinearGradient(-hl, 0, hl, 0);
-    const a  = this.pa;
-    lg.addColorStop(0,    `rgba(${this.cr},${this.cg},${this.cb},0)`);
-    lg.addColorStop(0.18, `rgba(${this.cr},${this.cg},${this.cb},${a})`);
-    lg.addColorStop(0.82, `rgba(${this.cr},${this.cg},${this.cb},${a})`);
-    lg.addColorStop(1,    `rgba(${this.cr},${this.cg},${this.cb},0)`);
-
-    ctx.beginPath();
-    ctx.moveTo(-hl, 0);
-    ctx.lineTo( hl, 0);
-    ctx.strokeStyle = lg;
-    ctx.lineWidth   = this.lw;
-
-    if(this.specular){
-      ctx.shadowBlur  = 18;
-      ctx.shadowColor = `rgba(${this.cr},${this.cg},${this.cb},0.7)`;
-    }
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-    ctx.restore();
-  };
-
-  // Slow red ambient glow drifting in background
-  let gt = 0;
-  function drawGlow(){
-    const x = W*(0.5 + Math.sin(gt*0.0004)*0.35);
-    const y = H*(0.45+ Math.cos(gt*0.0003)*0.2);
-    const rg = ctx.createRadialGradient(x,y,0, x,y, W*0.6);
-    rg.addColorStop(0,  'rgba(232,0,28,0.06)');
-    rg.addColorStop(0.5,'rgba(120,20,10,0.025)');
-    rg.addColorStop(1,  'rgba(0,0,0,0)');
-    ctx.fillStyle = rg;
-    ctx.fillRect(0,0,W,H);
-  }
-
-  const streaks = Array.from({length:18}, (_,i) => new Streak(true));
-
-  (function animate(){
-    ctx.clearRect(0,0,W,H);
-    gt++;
-    drawGlow();
-    streaks.forEach(s=>{ s.update(); s.draw(); });
-    requestAnimationFrame(animate);
-  })();
-})();
-
 // ── SCROLL PROGRESS ─────────────────────────────────
 const sp = document.getElementById('sp');
 window.addEventListener('scroll', () => {
@@ -1411,13 +1322,15 @@ window.addEventListener('scroll', () => {
 const mob = document.getElementById('mob');
 const ham = document.getElementById('ham');
 function toggleMenu(){
+  const open = mob.classList.toggle('open');
   ham.classList.toggle('open');
-  mob.classList.toggle('open');
-  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
+  ham.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 }
 function closeMenu(){
   ham.classList.remove('open');
   mob.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
 
@@ -1465,6 +1378,20 @@ const counterObs = new IntersectionObserver((entries) => {
   });
 }, {threshold:.5});
 document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+
+// ── NEWSLETTER ───────────────────────────────────────
+function handleNewsletter(e){
+  e.preventDefault();
+  const form = document.getElementById('nl-form');
+  const btn = form.querySelector('.nl-btn');
+  const success = document.getElementById('nl-success');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+  setTimeout(() => {
+    form.style.display = 'none';
+    success.classList.add('show');
+  }, 800);
+}
 
 // ── ACTIVE NAV LINK ───────────────────────────────────
 const sections = document.querySelectorAll('section[id], div[id]');
