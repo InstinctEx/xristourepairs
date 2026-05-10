@@ -443,9 +443,8 @@
 
     /* ====== GALLERY ====== */
     #gallery{background:var(--charcoal)}
-    .gallery-grid{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:310px 310px;gap:10px;margin-top:52px}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:280px;gap:10px;margin-top:52px}
     .g-item{position:relative;overflow:hidden;border-radius:10px;cursor:pointer}
-    .g-item.tall{grid-row:span 2}
     .g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s cubic-bezier(.25,.46,.45,.94)}
     .g-item:hover img{transform:scale(1.07)}
     .g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.06) 50%,transparent 100%)}
@@ -498,7 +497,8 @@
     .ci-text a{transition:color .2s}
     .ci-text a:hover{color:var(--red)}
     .map-box{border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 64px rgba(0,0,0,.5);height:400px}
-    .map-box iframe{width:100%;height:100%;border:none;display:block;filter:invert(.88) hue-rotate(180deg) saturate(.7) brightness(.95)}
+    .map-box iframe{width:100%;height:100%;border:none;display:block}
+    .map-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 
     /* ====== FOOTER ====== */
     footer{background:#040404;border-top:1px solid var(--border)}
@@ -516,15 +516,10 @@
     .f-col li{margin-bottom:9px}
     .f-col a{font-size:13px;color:rgba(255,255,255,.45);transition:color .2s}
     .f-col a:hover{color:var(--red)}
-    .nl-form{display:flex;gap:8px}
-    .nl-input{flex:1;padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:5px;color:#fff;font-size:12.5px;outline:none;transition:border-color .2s;font-family:'DM Sans',sans-serif}
-    .nl-input::placeholder{color:rgba(255,255,255,.22)}
-    .nl-input:focus{border-color:var(--red)}
-    .nl-btn{padding:10px 14px;background:var(--red);border:none;border-radius:5px;color:#fff;cursor:pointer;transition:background .2s;font-size:12px}
-    .nl-btn:hover{background:var(--red-dark)}
-    .nl-btn:disabled{opacity:.5;cursor:not-allowed}
-    .nl-success{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(100,220,100,.8);margin-top:8px;display:none}
-    .nl-success.show{display:block}
+    .f-quick-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:6px;font-size:12.5px;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.08);margin-bottom:8px;transition:all .22s;text-decoration:none;font-family:'DM Sans',sans-serif}
+    .f-quick-btn i{font-size:14px;width:16px;text-align:center;flex-shrink:0}
+    .f-quick-btn.phone:hover{background:rgba(232,0,28,.08);border-color:var(--red);color:var(--red)}
+    .f-quick-btn.maps:hover{background:rgba(66,133,244,.08);border-color:#4285F4;color:#4285F4}
     .footer-bar{border-top:1px solid var(--border);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
     .footer-bar p{font-family:'DM Mono',monospace;font-size:10.5px;color:rgba(255,255,255,.2)}
     .footer-bar a{color:rgba(232,0,28,.55);transition:color .2s}
@@ -580,6 +575,7 @@
       .testi-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
       .contact-grid{grid-template-columns:1fr;gap:40px}
       .footer-inner{grid-template-columns:1fr 1fr}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:620px){
       .sbar-grid{grid-template-columns:repeat(2,1fr)}
@@ -593,8 +589,7 @@
       .p-card{width:100%;max-width:260px}
       .photo-split{grid-template-columns:1fr;height:auto}
       .ps-item{height:200px}
-      .gallery-grid{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}
-      .g-item.tall{grid-row:span 1}
+      .gallery-grid{grid-template-columns:1fr;grid-auto-rows:240px}
       .footer-inner{grid-template-columns:1fr}
       .footer-bar{flex-direction:column;text-align:center}
     }
@@ -691,8 +686,8 @@
         <span class="en">Call Now</span>
       </a>
       <a href="#body-repair" class="btn btn-outline">
-        <span class="gr">Οι Υπηρεσίες μας</span>
-        <span class="en">Our Services</span>
+        <span class="gr">Υπηρεσίες</span>
+        <span class="en">Services</span>
         <i class="fas fa-arrow-down"></i>
       </a>
     </div>
@@ -769,11 +764,11 @@
         <span class="sbar-lbl gr">Βαφή</span><span class="sbar-lbl en">Paint</span>
       </a>
       <a href="#paint-polish" class="sbar-item">
-        <i class="fas fa-magic sbar-icon"></i>
+        <i class="fas fa-brush sbar-icon"></i>
         <span class="sbar-lbl gr">Γυαλάδα</span><span class="sbar-lbl en">Polish</span>
       </a>
       <a href="#glass-section" class="sbar-item">
-        <i class="fas fa-tablet-alt sbar-icon"></i>
+        <i class="fas fa-window-restore sbar-icon"></i>
         <span class="sbar-lbl gr">Τζάμια</span><span class="sbar-lbl en">Glass</span>
       </a>
       <a href="#ac-section" class="sbar-item">
@@ -1084,8 +1079,8 @@
       </p>
     </div>
     <div class="gallery-grid">
-      <div class="g-item tall sr up">
-        <img src="images/2cars.jpg" alt="Customer vehicles" loading="lazy"/>
+      <div class="g-item sr up">
+        <img src="images/2cars.jpg" alt="Customer vehicles at the workshop" loading="lazy"/>
         <div class="g-overlay"></div>
         <div class="g-caption">
           <span class="g-cap-tag gr">Αυτοκίνητα Πελατών</span><span class="g-cap-tag en">Customer Vehicles</span>
@@ -1093,7 +1088,7 @@
         </div>
       </div>
       <div class="g-item sr d1">
-        <img src="images/mini.jpg" alt="MINI in paint booth" loading="lazy"/>
+        <img src="images/mini.jpg" alt="MINI Cooper in paint booth full respray" loading="lazy"/>
         <div class="g-overlay"></div>
         <div class="g-caption">
           <span class="g-cap-tag gr">Θάλαμος Βαφής</span><span class="g-cap-tag en">Paint Booth</span>
@@ -1101,13 +1096,107 @@
           <h4 class="g-cap-title en">MINI Cooper — Full Respray</h4>
         </div>
       </div>
+      <div class="g-item sr d2">
+        <img src="images/mercedes-amg-finished.jpg" alt="Mercedes C63 AMG finished result" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Αποτέλεσμα</span><span class="g-cap-tag en">Finished Result</span>
+          <h4 class="g-cap-title">Mercedes C63 AMG</h4>
+        </div>
+      </div>
       <div class="g-item sr d3">
-        <img src="images/pistols.jpg" alt="Spray equipment" loading="lazy"/>
+        <img src="images/mercedes-amg-workshop.jpg" alt="Mercedes C63 AMG in workshop" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Στο Συνεργείο</span><span class="g-cap-tag en">In Workshop</span>
+          <h4 class="g-cap-title">Mercedes C63 AMG</h4>
+        </div>
+      </div>
+      <div class="g-item sr d1">
+        <img src="images/bmw-m5-matte-black.jpg" alt="BMW M5 E60 matte black finish" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Αποτέλεσμα</span><span class="g-cap-tag en">Finished Result</span>
+          <h4 class="g-cap-title gr">BMW M5 — Ματ Μαύρο</h4>
+          <h4 class="g-cap-title en">BMW M5 — Matte Black</h4>
+        </div>
+      </div>
+      <div class="g-item sr d2">
+        <img src="images/bmw-e46-finished.jpg" alt="BMW E46 completed after service" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Αποτέλεσμα</span><span class="g-cap-tag en">Finished Result</span>
+          <h4 class="g-cap-title gr">BMW E46 — Ολοκληρωμένο</h4>
+          <h4 class="g-cap-title en">BMW E46 — Completed</h4>
+        </div>
+      </div>
+      <div class="g-item sr d3">
+        <img src="images/paint-booth-silver.jpg" alt="Silver car being resprayed in paint booth" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Θάλαμος Βαφής</span><span class="g-cap-tag en">Paint Booth</span>
+          <h4 class="g-cap-title gr">Μερική Βαφή — Ασημί</h4>
+          <h4 class="g-cap-title en">Partial Respray — Silver</h4>
+        </div>
+      </div>
+      <div class="g-item sr d1">
+        <img src="images/paint-booth-black-sedan.jpg" alt="Black sedan freshly painted in booth" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Θάλαμος Βαφής</span><span class="g-cap-tag en">Paint Booth</span>
+          <h4 class="g-cap-title gr">Ολική Βαφή — Μαύρο</h4>
+          <h4 class="g-cap-title en">Full Respray — Black</h4>
+        </div>
+      </div>
+      <div class="g-item sr d2">
+        <img src="images/paint-booth-green.jpg" alt="Green car masked and prepped in paint booth" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Προετοιμασία Βαφής</span><span class="g-cap-tag en">Paint Preparation</span>
+          <h4 class="g-cap-title gr">Μάσκαρισμα &amp; Προετοιμασία</h4>
+          <h4 class="g-cap-title en">Masking &amp; Preparation</h4>
+        </div>
+      </div>
+      <div class="g-item sr d3">
+        <img src="images/workshop-interior.jpg" alt="Workshop interior with Porsche and Subaru Impreza" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Το Συνεργείο μας</span><span class="g-cap-tag en">Our Workshop</span>
+          <h4 class="g-cap-title">Porsche 996 &amp; Subaru Impreza WRX</h4>
+        </div>
+      </div>
+      <div class="g-item sr d1">
+        <img src="images/2022-08-26.jpg" alt="BMW body repair in progress" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Φανοποιΐα</span><span class="g-cap-tag en">Body Repair</span>
+          <h4 class="g-cap-title gr">BMW — Επισκευή Αμαξώματος</h4>
+          <h4 class="g-cap-title en">BMW — Bodywork Repair</h4>
+        </div>
+      </div>
+      <div class="g-item sr d2">
+        <img src="images/audi-a3-workshop.jpg" alt="Audi A3 in workshop" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Στο Συνεργείο</span><span class="g-cap-tag en">In Workshop</span>
+          <h4 class="g-cap-title">Audi A3</h4>
+        </div>
+      </div>
+      <div class="g-item sr d3">
+        <img src="images/pistols.jpg" alt="Professional SATA spray guns" loading="lazy"/>
         <div class="g-overlay"></div>
         <div class="g-caption">
           <span class="g-cap-tag gr">Εξοπλισμός</span><span class="g-cap-tag en">Equipment</span>
           <h4 class="g-cap-title gr">Πιστόλια Βαφής SATA</h4>
           <h4 class="g-cap-title en">SATA Spray Guns</h4>
+        </div>
+      </div>
+      <div class="g-item sr d1">
+        <img src="images/mazda-rx8-workshop.jpg" alt="Mazda RX-8 in the workshop" loading="lazy"/>
+        <div class="g-overlay"></div>
+        <div class="g-caption">
+          <span class="g-cap-tag gr">Στο Συνεργείο</span><span class="g-cap-tag en">In Workshop</span>
+          <h4 class="g-cap-title">Mazda RX-8</h4>
         </div>
       </div>
     </div>
@@ -1122,12 +1211,13 @@
       <h2 class="s-h2"><span class="gr">Τι Λένε οι Πελάτες μας</span><span class="en">What Our Customers Say</span></h2>
     </div>
     <div style="text-align:center">
-      <div class="google-pill sr">
+      <a href="https://share.google/R8xZjEruglQLprxd4" target="_blank" rel="noopener noreferrer" class="google-pill sr" style="display:inline-flex;text-decoration:none;color:inherit">
         <i class="fab fa-google" style="color:#4285F4;font-size:18px"></i>
         <span class="stars">★★★★★</span>
         <strong>4.9 / 5</strong>
-        <span style="color:#aaa">&nbsp;—&nbsp;50+ <span class="gr">κριτικές</span><span class="en">reviews</span></span>
-      </div>
+        <span style="color:#aaa">&nbsp;—&nbsp;50+ <span class="gr">κριτικές στο Google</span><span class="en">Google reviews</span></span>
+        <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;color:#aaa;margin-left:6px;align-self:center"></i>
+      </a>
     </div>
     <div class="testi-grid">
       <div class="testi-card sr up d1">
@@ -1232,12 +1322,19 @@
         </div>
         <div style="margin-top:30px;display:flex;gap:10px;flex-wrap:wrap">
           <a href="tel:+302235091418" class="btn btn-red"><i class="fas fa-phone"></i><span class="gr">Καλέστε Τώρα</span><span class="en">Call Now</span></a>
-          <a href="#" class="btn btn-outline"><i class="fab fa-instagram"></i>Instagram</a>
+          <a href="https://share.google/R8xZjEruglQLprxd4" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fas fa-location-arrow"></i><span class="gr">Οδηγίες</span><span class="en">Directions</span></a>
         </div>
       </div>
       <div class="sr dn">
         <div class="map-box">
-          <iframe src="https://maps.google.com/maps?q=38.759283,22.8937898&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Shop Location"></iframe>
+          <iframe src="https://maps.google.com/maps?q=38.759283,22.8937898&z=16&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Χρήστου Μιχάλης — Shop Location"></iframe>
+        </div>
+        <div class="map-actions">
+          <a href="https://share.google/R8xZjEruglQLprxd4" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="flex:1;justify-content:center">
+            <i class="fas fa-location-arrow"></i>
+            <span class="gr">Οδηγίες Πλοήγησης</span>
+            <span class="en">Get Directions</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1286,15 +1383,17 @@
         </ul>
       </div>
       <div class="f-col">
-        <h5>Newsletter</h5>
-        <p style="font-size:11.5px;color:var(--muted);margin-bottom:12px" class="gr">Μείνετε ενημερωμένοι για προσφορές &amp; νέα.</p>
-        <p style="font-size:11.5px;color:var(--muted);margin-bottom:12px" class="en">Stay updated with our latest offers &amp; news.</p>
-        <form class="nl-form" id="nl-form" onsubmit="handleNewsletter(event)">
-          <label for="nl-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Email</label>
-          <input class="nl-input" id="nl-email" type="email" placeholder="Email" autocomplete="email" aria-label="Your email address" required/>
-          <button class="nl-btn" type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
-        </form>
-        <div class="nl-success" id="nl-success" role="status" aria-live="polite"><span class="gr">Ευχαριστούμε!</span><span class="en">Thank you!</span></div>
+        <h5 class="gr">Άμεση Επικοινωνία</h5>
+        <h5 class="en">Quick Contact</h5>
+        <a href="tel:+302235091418" class="f-quick-btn phone">
+          <i class="fas fa-phone"></i>
+          <span>22350 91418</span>
+        </a>
+        <a href="https://share.google/R8xZjEruglQLprxd4" target="_blank" rel="noopener noreferrer" class="f-quick-btn maps">
+          <i class="fas fa-location-dot"></i>
+          <span class="gr">Οδηγίες Google Maps</span>
+          <span class="en">Google Maps Directions</span>
+        </a>
       </div>
     </div>
     <div class="footer-bar">
@@ -1378,20 +1477,6 @@ const counterObs = new IntersectionObserver((entries) => {
   });
 }, {threshold:.5});
 document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
-
-// ── NEWSLETTER ───────────────────────────────────────
-function handleNewsletter(e){
-  e.preventDefault();
-  const form = document.getElementById('nl-form');
-  const btn = form.querySelector('.nl-btn');
-  const success = document.getElementById('nl-success');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
-  setTimeout(() => {
-    form.style.display = 'none';
-    success.classList.add('show');
-  }, 800);
-}
 
 // ── ACTIVE NAV LINK ───────────────────────────────────
 const sections = document.querySelectorAll('section[id], div[id]');
