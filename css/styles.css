@@ -454,6 +454,46 @@ html.lang-gr .en{display:none!important}
   100%{transform:skewX(-8deg) translateX(110%)}
 }
 
+/* ====== PRIVACY NOTICE (neutral class names to avoid ad-blocker false positives) ====== */
+.xr-privacy{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:9100;
+  background:linear-gradient(180deg,rgba(24,24,24,.97) 0%,rgba(8,8,8,.97) 100%);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid var(--border2);border-left:3px solid var(--red);
+  border-radius:10px;
+  padding:20px 24px;
+  box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 36px rgba(232,0,28,.08);
+  max-width:920px;margin:0 auto;
+  display:none;opacity:0;transform:translateY(24px);
+  transition:opacity .45s ease,transform .45s cubic-bezier(.16,1,.3,1);
+}
+.xr-privacy.show{display:block}
+.xr-privacy.vis{opacity:1;transform:translateY(0)}
+.xrp-inner{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.xrp-icon{
+  width:42px;height:42px;border-radius:8px;
+  background:rgba(232,0,28,.1);border:1px solid rgba(232,0,28,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--red);flex-shrink:0;
+}
+.xrp-text{flex:1;min-width:220px}
+.xrp-title{
+  display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:6px;
+}
+.xrp-msg{font-size:12.5px;line-height:1.65;color:rgba(255,255,255,.6);margin:0}
+.xrp-msg a{color:var(--red);transition:color .2s}
+.xrp-msg a:hover{color:var(--white)}
+.xrp-actions{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.xrp-btn{padding:11px 22px;font-size:9.5px}
+@media(max-width:760px){
+  .xr-privacy{left:10px;right:10px;bottom:10px;padding:18px 18px;border-left-width:2px}
+  .xrp-inner{flex-direction:column;align-items:stretch;gap:16px}
+  .xrp-icon{align-self:flex-start}
+  .xrp-actions{justify-content:stretch}
+  .xrp-btn{flex:1;justify-content:center}
+}
+
 /* ====== HERO SPEED LINES ====== */
 .hero-speed-lines{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:.028}
 .hero-speed-lines::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-10deg,transparent 0px,transparent 28px,rgba(255,255,255,1) 28px,rgba(255,255,255,1) 29px);animation:speed-slide 4s linear infinite}

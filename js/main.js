@@ -122,8 +122,72 @@ document.querySelectorAll('.faq-item').forEach(item => {
   item.addEventListener('click', () => item.classList.toggle('open'));
 });
 
+// ── PRIVACY / ANALYTICS CONSENT NOTICE ────────────────
+// Note: class/id names deliberately avoid "cookie" or "banner"
+// because ad blockers (uBlock, AdGuard, Brave Shields) auto-hide those.
+(function privacyConsent(){
+  var saved = null;
+  try{ saved = localStorage.getItem('xr-consent'); }catch(e){}
+  if(saved === 'granted' || saved === 'denied') return; // already chose
+
+  var notice = document.createElement('div');
+  notice.id = 'xr-privacy';
+  notice.className = 'xr-privacy';
+  notice.setAttribute('role', 'dialog');
+  notice.setAttribute('aria-label', 'Privacy preferences');
+  notice.setAttribute('aria-live', 'polite');
+  notice.innerHTML =
+    '<div class="xrp-inner">' +
+      '<div class="xrp-icon"><i class="fas fa-shield-halved"></i></div>' +
+      '<div class="xrp-text">' +
+        '<strong class="xrp-title gr">Σεβόμαστε την ιδιωτικότητά σας</strong>' +
+        '<strong class="xrp-title en">We respect your privacy</strong>' +
+        '<p class="xrp-msg gr">Χρησιμοποιούμε αναλυτικά εργαλεία μόνο για να μετράμε την επισκεψιμότητα και να βελτιώνουμε τον ιστότοπο. <strong>Δεν διαφημίζουμε.</strong></p>' +
+        '<p class="xrp-msg en">We use analytics only to measure traffic and improve the site. <strong>No advertising.</strong></p>' +
+      '</div>' +
+      '<div class="xrp-actions">' +
+        '<button type="button" class="btn btn-outline xrp-btn" onclick="cookieReject()">' +
+          '<span class="gr">Απόρριψη</span><span class="en">Reject</span>' +
+        '</button>' +
+        '<button type="button" class="btn btn-red xrp-btn" onclick="cookieAccept()">' +
+          '<span class="gr">Αποδοχή</span><span class="en">Accept</span>' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(notice);
+
+  // Show after a short delay so it doesn't fight hero animation
+  setTimeout(function(){
+    notice.classList.add('show');
+    requestAnimationFrame(function(){ notice.classList.add('vis'); });
+  }, 900);
+})();
+
+function cookieAccept(){
+  try{ localStorage.setItem('xr-consent', 'granted'); }catch(e){}
+  if(typeof gtag === 'function'){
+    gtag('consent', 'update', { 'analytics_storage': 'granted' });
+  }
+  hidePrivacyNotice();
+}
+function cookieReject(){
+  try{ localStorage.setItem('xr-consent', 'denied'); }catch(e){}
+  if(typeof gtag === 'function'){
+    gtag('consent', 'update', { 'analytics_storage': 'denied' });
+  }
+  hidePrivacyNotice();
+}
+function hidePrivacyNotice(){
+  var n = document.getElementById('xr-privacy');
+  if(!n) return;
+  n.classList.remove('vis');
+  setTimeout(function(){ n.classList.remove('show'); n.remove(); }, 450);
+}
+
 // Expose for inline handlers
 window.toggleMenu = toggleMenu;
 window.closeMenu = closeMenu;
 window.setLang = setLang;
 window.updateMobLang = updateMobLang;
+window.cookieAccept = cookieAccept;
+window.cookieReject = cookieReject;
